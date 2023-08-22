@@ -41,9 +41,9 @@ const Header = ({ navigation}) => {
 
 
               <TouchableOpacity onPress={() => {
-                console.log('Cart icon pressed');
+                console.log('Chat icon pressed');
               }}>
-                <Image source={require('../images/icon-cart.png')} style={styles.image}/>
+                <Image source={require('../images/icon-chat.png')} style={styles.image}/>
               </TouchableOpacity>
   
               <TouchableOpacity onPress={() => {

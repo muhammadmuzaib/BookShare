@@ -24,7 +24,7 @@ function HomeScreen  ({ navigation }) {
 
 
         <View style={{backgroundColor: '#F6F5F5'}}>
-          <Text style={styles.text}>Recent purchase from your fellow University students</Text>
+          <Text style={styles.text}>Recent purchases</Text>
           <ScrollView horizontal={true} style={styles.box_wrapper} showsHorizontalScrollIndicator={false}>
             <View style={styles.box}><Text>Box 1</Text></View>
             <View style={styles.box}><Text>Box 2</Text></View>

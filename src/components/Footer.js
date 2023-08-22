@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Linking } from 'react-native';
 
 const Footer = ({ navigation }) => {
-    const githubURL = 'https://github.com/YourGitHubUsername'; // replace with your Github URL
+    const githubURL = 'https://github.com/muhammadmuzaib/BookMarketPlace'; 
 
     return (
         <View style={styles.container}>
@@ -25,7 +25,8 @@ const Footer = ({ navigation }) => {
                         } else {
                             console.log("Unable to open link: " + githubURL);
                         }
-                    });
+                    })
+                    .catch(err => console.error('An error occurred', err));
                 }}>
                     <Text style={styles.footer_text}>Github</Text>
                 </TouchableOpacity>
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: '#FFFFFF',
+        textDecorationLine: 'underline',
         marginVertical: 5
     }
 });

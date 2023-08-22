@@ -6,7 +6,7 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import { AppRegistry, View, Text} from 'react-native';
+import { AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './src/screens/HomeScreen';
@@ -15,6 +15,7 @@ import AccountScreen from './src/screens/AccountScreen';
 import HelloScreen from './src/screens/HelloScreen';
 import MyBooksScreen from './src/screens/MyBooksScreen';
 import HelpScreen from './src/screens/HelpScreen';
+import LoginScreen from './src/screens/LoginScreen';
 
 const Root = createStackNavigator();
 
@@ -22,7 +23,8 @@ const Root = createStackNavigator();
 const App = () => {
     return (  
         <NavigationContainer>
-            <Root.Navigator initialRouteName='HomeScreen' screenOptions={{ headerShown: false }}>
+            <Root.Navigator initialRouteName='LoginScreen' screenOptions={{ headerShown: false }}>
+                <Root.Screen name="LoginScreen" component={LoginScreen} />
                 <Root.Screen name="HomeScreen" component={HomeScreen} />
                 <Root.Screen name="AccountScreen" component={AccountScreen} />
                 <Root.Screen name="MyBooksScreen" component={MyBooksScreen} />
