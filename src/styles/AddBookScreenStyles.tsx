@@ -5,16 +5,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10, // Add padding to avoid elements sticking to the edge
+    padding: 10,
   },
   image: {
     width: 100,
     height: 100,
-    marginBottom: 10, // Add margin to avoid elements sticking together
+    marginBottom: 10,
   },
   inputItem: {
-    marginVertical: 5, // Add margin to avoid elements sticking together
-    width: '100%', // Make input items take the full width
+    marginVertical: 5,
+    width: '100%',
   },
 });
 export default styles;

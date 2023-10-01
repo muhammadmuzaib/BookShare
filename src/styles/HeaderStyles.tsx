@@ -13,11 +13,6 @@ const styles = StyleSheet.create({
     height: 30,
     margin: 10,
   },
-  navWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   iconWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',

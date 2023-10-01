@@ -18,11 +18,23 @@ import HelpScreen from './src/screens/HelpScreen';
 import LoginScreen from './src/screens/LoginScrreen';
 import SearchScreen from './src/screens/SearchScreen';
 import AddPostScreen from './src/screens/AddBookScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 import {customTheme} from './src/theme/index';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Root = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const SettingsStack = createStackNavigator();
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator initialRouteName="Settings">
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="HelpScreen" component={HelpScreen} />
+      {/* Add other screens here */}
+    </SettingsStack.Navigator>
+  );
+}
 
 function MainTabs() {
   const theme = useTheme();
@@ -47,6 +59,7 @@ function MainTabs() {
             <TouchableOpacity activeOpacity={0.7}>
               <Image
                 source={require('./src/images/icon-home.png')}
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   margin: 10,
                   width: 30,
@@ -68,6 +81,7 @@ function MainTabs() {
             <TouchableOpacity activeOpacity={0.7}>
               <Image
                 source={require('./src/images/icon-search.png')}
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   margin: 10,
                   width: 30,
@@ -90,6 +104,7 @@ function MainTabs() {
             <TouchableOpacity activeOpacity={0.7}>
               <Image
                 source={require('./src/images/icon-addPost.png')}
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   margin: 10,
                   width: 30,
@@ -112,6 +127,7 @@ function MainTabs() {
             <TouchableOpacity activeOpacity={0.7}>
               <Image
                 source={require('./src/images/profile.png')}
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   margin: 10,
                   width: 30,
@@ -140,6 +156,7 @@ const App = () => {
           <Root.Screen name="MyBooksScreen" component={MyBooksScreen} />
           <Root.Screen name="HelloScreen" component={HelloScreen} />
           <Root.Screen name="HelpScreen" component={HelpScreen} />
+          <Root.Screen name="SettingsStack" component={SettingsStackScreen} />
         </Root.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

@@ -8,6 +8,7 @@ import {
   CheckIcon,
   FormControl,
   WarningOutlineIcon,
+  Center,
 } from 'native-base';
 import styles from '../styles/AddBookScreenStyles';
 
@@ -16,7 +17,7 @@ export default function AddBookScreen() {
   const [isbn, setIsbn] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
   const [bookName, setBookName] = useState<string>('');
-  const [bookState, setBookState] = useState<string>('new');
+  const [service, setService] = React.useState('');
 
   const openCamera = async () => {
     const result = await launchCamera({
@@ -66,25 +67,30 @@ export default function AddBookScreen() {
           value={bookName}
           onChangeText={text => setBookName(text)}
         />
-        <FormControl isRequired isInvalid>
-          <FormControl.Label>Book State</FormControl.Label>
-          <Select
-            selectedValue={bookState}
-            minWidth="200"
-            accessibilityLabel="Select Book State"
-            placeholder="Select Book State"
-            onValueChange={value => setBookState(value)}
-            _selectedItem={{
-              bg: 'cyan.600',
-              endIcon: <CheckIcon size="5" />,
-            }}>
-            <Select.Item label="New" value="New" />
-            <Select.Item label="Used" value="Used" />
-          </Select>
-          <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-            Please make a selection!
-          </FormControl.ErrorMessage>
-        </FormControl>
+        <Center>
+          <FormControl w="3/4" maxW="300" isRequired isInvalid isReadOnly>
+            <FormControl.Label>Choose service</FormControl.Label>
+            <Select
+              minWidth="200"
+              accessibilityLabel="Choose Service"
+              placeholder="Choose Service"
+              _selectedItem={{
+                bg: 'teal.600',
+                endIcon: <CheckIcon size={5} />,
+              }}
+              mt="1">
+              <Select.Item label="UX Research" value="ux" />
+              <Select.Item label="Web Development" value="web" />
+              <Select.Item label="Cross Platform Development" value="cross" />
+              <Select.Item label="UI Designing" value="ui" />
+              <Select.Item label="Backend Development" value="backend" />
+            </Select>
+            <FormControl.ErrorMessage
+              leftIcon={<WarningOutlineIcon size="xs" />}>
+              Please make a selection!
+            </FormControl.ErrorMessage>
+          </FormControl>
+        </Center>
       </VStack>
     </View>
   );
