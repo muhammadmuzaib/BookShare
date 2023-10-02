@@ -7,11 +7,16 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   postImg: {
-    width: '33.33%',
-    height: 100,
+    aspectRatio: 1,
+    width: '100%',
+    height: undefined,
   },
   buttonWrapper: {
     marginHorizontal: 20,
+  },
+  itemContainer: {
+    flex: 1 / 3,
+    padding: 1,
   },
 });
 export default styles;
