@@ -1,12 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  text: {
-    textDecorationLine: 'underline',
-  },
-  appName: {
-    marginBottom: 100,
+  searchIcon: {
+    width: 30,
+    height: 30,
   },
 });
-
 export default styles;

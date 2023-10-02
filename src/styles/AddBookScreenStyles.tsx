@@ -16,5 +16,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     width: '100%',
   },
+  buttons: {
+    margin: 10,
+  },
+  submitButtonWrapper: {
+    marginTop: 30,
+  },
 });
 export default styles;

@@ -1,39 +1,92 @@
-import React from 'react';
-import {View, Image, TouchableOpacity, Text, TextInput} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Box,
+  Text,
+  Input,
+  Button,
+  FormControl,
+  WarningOutlineIcon,
+  useTheme,
+  Link,
+} from 'native-base';
 import styles from '../styles/LoginScreenStyles';
 
-function LoginScreen() {
+function LoginScreen({navigation}: {navigation: any}) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const theme = useTheme();
+
+  const handleLogin = () => {
+    setUsernameError(!username);
+    setPasswordError(!password);
+    if (username && password) {
+      console.log('Logging in...');
+      navigation.navigate('Main');
+    }
+  };
+
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.title}>Login Page</Text>
+    <Box flex={1} p={4} justifyContent="center">
+      <Text
+        fontSize="4xl"
+        style={styles.appName}
+        mb={4}
+        textAlign="center"
+        color={theme.colors.primary[800]}>
+        BookShare
+      </Text>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Username</Text>
-          <TextInput style={styles.input} placeholder="Enter your username" />
+      <Text
+        fontSize="2xl"
+        mb={6}
+        textAlign="center"
+        color={theme.colors.primary[600]}>
+        Login Page
+      </Text>
 
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            secureTextEntry={true}
-          />
+      <FormControl isInvalid={usernameError} mb={4}>
+        <FormControl.Label>Username</FormControl.Label>
+        <Input
+          placeholder="Enter your username"
+          color={theme.colors.primary[400]}
+          value={username}
+          onChangeText={text => setUsername(text)}
+        />
+        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+          Username is required!
+        </FormControl.ErrorMessage>
+      </FormControl>
 
-          <TouchableOpacity
-            onPress={() => console.log('Forgot Password pressed')}>
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
-          </TouchableOpacity>
-        </View>
+      <FormControl isInvalid={passwordError} mb={4}>
+        <FormControl.Label>Password</FormControl.Label>
+        <Input
+          placeholder="Enter your password"
+          color={theme.colors.primary[400]}
+          type="password"
+          value={password}
+          onChangeText={text => setPassword(text)}
+        />
+        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+          Password is required!
+        </FormControl.ErrorMessage>
+      </FormControl>
 
-        <TouchableOpacity style={styles.googleButton}>
-          <Image
-            style={styles.googleLogo}
-            source={require('../images/google-logo.png')}
-          />
-          <Text style={styles.buttonText}>Login with Google</Text>
-        </TouchableOpacity>
-      </View>
-    </>
+      <Button onPress={handleLogin} mb={4}>
+        Login
+      </Button>
+
+      <Link
+        _text={{
+          color: 'blue.500',
+          textAlign: 'center',
+          textDecorationLine: 'underline',
+        }}
+        onPress={() => console.log('Forgot Password pressed')}>
+        Forgot Password?
+      </Link>
+    </Box>
   );
 }
 

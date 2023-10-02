@@ -19,6 +19,7 @@ import LoginScreen from './src/screens/LoginScrreen';
 import SearchScreen from './src/screens/SearchScreen';
 import AddPostScreen from './src/screens/AddBookScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
 import {customTheme} from './src/theme/index';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
@@ -149,7 +150,7 @@ const App = () => {
     <NavigationContainer>
       <NativeBaseProvider theme={customTheme}>
         <Root.Navigator
-          initialRouteName="Main"
+          initialRouteName="LoginScreen"
           screenOptions={{headerShown: false}}>
           <Root.Screen name="LoginScreen" component={LoginScreen} />
           <Root.Screen name="Main" component={MainTabs} />
@@ -157,6 +158,7 @@ const App = () => {
           <Root.Screen name="HelloScreen" component={HelloScreen} />
           <Root.Screen name="HelpScreen" component={HelpScreen} />
           <Root.Screen name="SettingsStack" component={SettingsStackScreen} />
+          <Root.Screen name="EditProfileScreen" component={EditProfileScreen} />
         </Root.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

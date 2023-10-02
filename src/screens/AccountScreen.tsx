@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image} from 'react-native';
+import {Image, View} from 'react-native';
 import {
   Box,
   Text,
@@ -10,7 +10,6 @@ import {
   useTheme,
 } from 'native-base';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import styles from '../styles/AccountScreenStyles';
 
 const AccountScreen = ({navigation}: {navigation: any}) => {
@@ -22,6 +21,14 @@ const AccountScreen = ({navigation}: {navigation: any}) => {
     {id: '2', image: require('../images/profile.png')},
     {id: '3', image: require('../images/profile.png')},
     {id: '4', image: require('../images/profile.png')},
+    {id: '5', image: require('../images/profile.png')},
+    {id: '6', image: require('../images/profile.png')},
+    {id: '7', image: require('../images/profile.png')},
+    {id: '8', image: require('../images/profile.png')},
+    {id: '9', image: require('../images/profile.png')},
+    {id: '10', image: require('../images/profile.png')},
+    {id: '11', image: require('../images/profile.png')},
+    {id: '12', image: require('../images/profile.png')},
   ];
 
   const drafts = [
@@ -47,7 +54,7 @@ const AccountScreen = ({navigation}: {navigation: any}) => {
         <Image
           source={require('../images/profile.png')}
           alt="Profile Picture"
-          style={{width: 100, height: 100, borderRadius: 50}}
+          style={styles.profileImg}
         />
         {/* Username */}
         <Text
@@ -59,7 +66,10 @@ const AccountScreen = ({navigation}: {navigation: any}) => {
         {/* Edit Profile Button */}
         <Button
           width="full"
-          onPress={() => console.log('Edit Profile Pressed')}>
+          onPress={() => {
+            console.log('Edit Profile Pressed');
+            navigation.navigate('EditProfileScreen');
+          }}>
           Edit Profile
         </Button>
         {/* Bio */}
@@ -125,9 +135,15 @@ const AccountScreen = ({navigation}: {navigation: any}) => {
       numColumns={3}
       keyExtractor={item => item.id}
       renderItem={({item}) => (
-        <Image source={item.image} style={{width: '33.33%', height: 100}} />
+        <View style={styles.itemContainer}>
+          <Image
+            source={item.image}
+            style={styles.postImg}
+            resizeMode="cover"
+          />
+        </View>
       )}
-      ListFooterComponent={<Footer navigation={navigation} />}
+      //ListFooterComponent={<Footer navigation={navigation} />}
     />
   );
 };
