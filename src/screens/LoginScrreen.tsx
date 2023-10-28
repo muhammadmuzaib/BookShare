@@ -8,6 +8,7 @@ import {
   WarningOutlineIcon,
   useTheme,
   Link,
+  HStack,
 } from 'native-base';
 import styles from '../styles/LoginScreenStyles';
 
@@ -77,15 +78,32 @@ function LoginScreen({navigation}: {navigation: any}) {
         Login
       </Button>
 
-      <Link
-        _text={{
-          color: 'blue.500',
-          textAlign: 'center',
-          textDecorationLine: 'underline',
-        }}
-        onPress={() => console.log('Forgot Password pressed')}>
-        Forgot Password?
-      </Link>
+      <HStack space={4}>
+        <Link
+          _text={{
+            color: 'blue.500',
+            textAlign: 'center',
+            textDecorationLine: 'underline',
+          }}
+          onPress={() => console.log('Forgot Password pressed')}>
+          Forgot Password?
+        </Link>
+
+        <Box>
+          <Link
+            _text={{
+              color: 'blue.500',
+              textAlign: 'center',
+              textDecorationLine: 'underline',
+            }}
+            onPress={() => {
+              console.log('Sign Up pressed');
+              navigation.navigate('SignUpScreen');
+            }}>
+            SignUp
+          </Link>
+        </Box>
+      </HStack>
     </Box>
   );
 }
