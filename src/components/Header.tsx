@@ -22,22 +22,41 @@ const Header = ({navigation}: {navigation: any}) => {
           Username
         </Heading>
         <Spacer />
-        <Box>
-          <IconButton
-            icon={
-              <Image
-                source={require('../images/icon-settings.png')}
-                style={styles.image}
-                alt="Settings Icon"
-                size="sm"
-              />
-            }
-            onPress={() => {
-              console.log('Pressed settings icon');
-              navigation.navigate('SettingsStack');
-            }}
-          />
-        </Box>
+        <HStack>
+          <Box>
+            <IconButton
+              icon={
+                <Image
+                  source={require('../images/icon-chat.png')}
+                  style={styles.image}
+                  alt="Chat Icon"
+                  size="sm"
+                />
+              }
+              onPress={() => {
+                console.log('Pressed settings icon');
+                navigation.navigate('ChatListScreen');
+              }}
+            />
+          </Box>
+
+          <Box>
+            <IconButton
+              icon={
+                <Image
+                  source={require('../images/icon-settings.png')}
+                  style={styles.image}
+                  alt="Settings Icon"
+                  size="sm"
+                />
+              }
+              onPress={() => {
+                console.log('Pressed settings icon');
+                navigation.navigate('SettingsStack');
+              }}
+            />
+          </Box>
+        </HStack>
       </HStack>
     </Box>
   );
