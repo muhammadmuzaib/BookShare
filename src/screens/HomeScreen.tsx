@@ -29,12 +29,18 @@ function HomeScreen({navigation}: {navigation: any}) {
             style={styles.box_wrapper}
             showsHorizontalScrollIndicator={false}>
             {[...Array(4)].map((_, idx) => (
-              <Box key={idx} style={styles.box}>
-                <Image
-                  source={require('../images/book2.jpg')}
-                  style={styles.image}
-                />
-              </Box>
+              <Pressable
+                key={idx}
+                onPress={() =>
+                  navigation.navigate('BookDetails', {bookId: idx})
+                }>
+                <Box style={styles.box}>
+                  <Image
+                    source={require('../images/book3.jpg')}
+                    style={styles.image}
+                  />
+                </Box>
+              </Pressable>
             ))}
           </ScrollView>
 
@@ -48,12 +54,18 @@ function HomeScreen({navigation}: {navigation: any}) {
               style={styles.box_wrapper}
               showsHorizontalScrollIndicator={false}>
               {[...Array(4)].map((_, idx) => (
-                <Box key={idx} style={styles.box}>
-                  <Image
-                    source={require('../images/book2.jpg')}
-                    style={styles.image}
-                  />
-                </Box>
+                <Pressable
+                  key={idx}
+                  onPress={() =>
+                    navigation.navigate('BookDetails', {bookId: idx})
+                  }>
+                  <Box style={styles.box}>
+                    <Image
+                      source={require('../images/book2.jpg')}
+                      style={styles.image}
+                    />
+                  </Box>
+                </Pressable>
               ))}
             </ScrollView>
           </Box>
@@ -68,11 +80,15 @@ function HomeScreen({navigation}: {navigation: any}) {
               {[...Array(3)].map((_, idx) => (
                 <Pressable
                   key={idx}
-                  onPress={() => console.log('Past Rent book pressed.')}>
-                  <Image
-                    source={require('../images/book1.jpg')}
-                    style={styles.image}
-                  />
+                  onPress={() =>
+                    navigation.navigate('BookDetails', {bookId: idx})
+                  }>
+                  <Box style={styles.box}>
+                    <Image
+                      source={require('../images/book1.jpg')}
+                      style={styles.image}
+                    />
+                  </Box>
                 </Pressable>
               ))}
             </VStack>

@@ -11,6 +11,8 @@ import {
   HStack,
 } from 'native-base';
 import styles from '../styles/LoginScreenStyles';
+import {CommonActions} from '@react-navigation/native';
+import {useUserRole} from '../components/UserRoleContext';
 
 function LoginScreen({navigation}: {navigation: any}) {
   const [username, setUsername] = useState('');
@@ -19,12 +21,33 @@ function LoginScreen({navigation}: {navigation: any}) {
   const [passwordError, setPasswordError] = useState(false);
   const theme = useTheme();
 
+  const {setUserRole} = useUserRole();
+
   const handleLogin = () => {
     setUsernameError(!username);
     setPasswordError(!password);
     if (username && password) {
       console.log('Logging in...');
-      navigation.navigate('Main');
+      let nextScreen = 'Main'; // Default navigation target
+      if (username === 'admin' && password === 'admin') {
+        setUserRole('admin');
+        nextScreen = 'Admin';
+      } else if (username === 'superadmin' && password === 'superadmin') {
+        setUserRole('superAdmin');
+      } else {
+        setUserRole('user');
+        nextScreen = 'Main';
+      }
+
+      navigation.navigate(nextScreen);
+
+      // Reset the navigation state: App wont go to login page on back button press.
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: nextScreen}],
+        }),
+      );
     }
   };
 

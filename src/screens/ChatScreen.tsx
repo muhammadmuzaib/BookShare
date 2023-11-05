@@ -24,7 +24,6 @@ function ChatScreen({route}: Props) {
   const [messageText, setMessageText] = useState('');
   const [messageHistory, setMessageHistory] = useState([
     {id: '1', text: 'Hi there!', sender: 'John Doe'},
-    // add more messages here
   ]);
   const {userName} = route.params;
 
