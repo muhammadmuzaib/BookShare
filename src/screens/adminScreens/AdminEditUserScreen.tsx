@@ -36,7 +36,7 @@ const AdminEditUserScreen = ({
   };
 
   const handleMessageUser = () => {
-    // Navigate to the messaging screen
+    navigation.navigate('ChatScreen', {userId: userId});
   };
 
   const handleViewUserMessages = () => {

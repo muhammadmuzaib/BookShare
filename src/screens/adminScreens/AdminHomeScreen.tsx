@@ -1,13 +1,69 @@
-import React from 'react';
-import {Box, Text, Button, VStack, HStack, useTheme} from 'native-base';
+import React, {useState} from 'react';
+import {
+  Box,
+  Text,
+  Button,
+  VStack,
+  HStack,
+  useTheme,
+  Popover,
+} from 'native-base';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function AdminHomeScreen({navigation}: {navigation: any}) {
   const theme = useTheme();
+  const [showPopover, setShowPopover] = useState(false);
+
+  const togglePopover = () => {
+    setShowPopover(!showPopover);
+  };
 
   return (
     <Box flex={1} p={4} bgColor={theme.colors.primary[300]}>
-      <Text fontSize="4xl" mb={4} color={theme.colors.primary[800]}>
+      {/* Position the delete button at the top right */}
+      <Box position="absolute" top={0} right={0} p={2}>
+        <Popover
+          isOpen={showPopover}
+          onClose={() => setShowPopover(false)}
+          trigger={triggerProps => {
+            return (
+              <Button
+                {...triggerProps}
+                colorScheme="danger"
+                onPress={togglePopover}
+                variant="solid">
+                Log Out
+              </Button>
+            );
+          }}>
+          <Popover.Content accessibilityLabel="Delete Post" w="56">
+            <Popover.Arrow />
+            <Popover.CloseButton />
+            <Popover.Header>LogOut</Popover.Header>
+            <Popover.Body>Are you sure you want to Log Out?</Popover.Body>
+            <Popover.Footer justifyContent="flex-end">
+              <Button.Group space={2}>
+                <Button
+                  colorScheme="coolGray"
+                  variant="ghost"
+                  onPress={() => setShowPopover(false)}>
+                  Cancel
+                </Button>
+                <Button
+                  colorScheme="danger"
+                  onPress={() => {
+                    console.log('Log Out clicked');
+                    setShowPopover(false);
+                    navigation.navigate('LoginScreen');
+                  }}>
+                  LogOut
+                </Button>
+              </Button.Group>
+            </Popover.Footer>
+          </Popover.Content>
+        </Popover>
+      </Box>
+
+      <Text fontSize="4xl" mb={4} color={theme.colors.primary[800]} mt={12}>
         Admin Dashboard
       </Text>
 
@@ -18,7 +74,9 @@ function AdminHomeScreen({navigation}: {navigation: any}) {
 
         <HStack space={4}>
           <Button
-            onPress={() => console.log('Manage Users pressed')}
+            onPress={() => {
+              console.log('Manage Users pressed');
+            }}
             colorScheme="primary">
             Manage Users
           </Button>
@@ -36,7 +94,6 @@ function AdminHomeScreen({navigation}: {navigation: any}) {
           Recent Activities
         </Text>
 
-        {/* You can replace this with a FlatList or any list component to display actual data */}
         <Box bg={theme.colors.gray[100]} p={4} borderRadius={10}>
           <Text>User "JohnDoe" added a new book</Text>
         </Box>
@@ -44,8 +101,6 @@ function AdminHomeScreen({navigation}: {navigation: any}) {
         <Box bg={theme.colors.gray[100]} p={4} borderRadius={10}>
           <Text>User "JaneSmith" updated their profile</Text>
         </Box>
-
-        {/* Add more items or integrate with your data source */}
       </VStack>
     </Box>
   );

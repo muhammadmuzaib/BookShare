@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, {useState, useEffect} from 'react';
 import {Box, Text, VStack, useTheme, Button, Popover} from 'native-base';
 import {ScrollView, TouchableOpacity, Image} from 'react-native';
@@ -14,47 +15,6 @@ interface UserPosts {
   posts: Post[];
 }
 
-interface PostPopoverProps {
-  postId: number;
-  isOpen: boolean;
-  onClose: () => void;
-  onDelete: (postId: number) => void;
-}
-
-// PostPopover component defined outside of EditUserPostsScreen
-const PostPopover: React.FC<PostPopoverProps> = ({
-  postId,
-  isOpen,
-  onClose,
-  onDelete,
-}) => {
-  return (
-    <Popover
-      isOpen={isOpen}
-      onClose={onClose}
-      trigger={triggerProps => {
-        return <Box {...triggerProps} />;
-      }}>
-      <Popover.Content accessibilityLabel="Delete Post" borderRadius="md">
-        <Popover.Arrow />
-        <Popover.CloseButton />
-        <Popover.Header>Delete Post</Popover.Header>
-        <Popover.Body>Are you sure you want to delete this post?</Popover.Body>
-        <Popover.Footer justifyContent="flex-end">
-          <Button.Group space={2}>
-            <Button variant="unstyled" colorScheme="coolGray" onPress={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="danger" onPress={() => onDelete(postId)}>
-              Delete
-            </Button>
-          </Button.Group>
-        </Popover.Footer>
-      </Popover.Content>
-    </Popover>
-  );
-};
-
 const EditUserPostsScreen = () => {
   const theme = useTheme();
   const [userDetails, setUserDetails] = useState<UserPosts>({
@@ -68,25 +28,9 @@ const EditUserPostsScreen = () => {
     ],
   });
   const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
-  const [showPopover, setShowPopover] = useState<boolean>(false);
-
-  useEffect(() => {
-    // Fetch the user details including their posts here
-    // setUserDetails(fetchedData);
-  }, []);
 
   const handlePressPost = (postId: number) => {
     setSelectedPostId(postId);
-    setShowPopover(true);
-  };
-
-  const handleDeletePost = (postId: number) => {
-    setShowPopover(false);
-    // Call to backend to delete the post and then update state
-    setUserDetails(prevDetails => ({
-      ...prevDetails,
-      posts: prevDetails.posts.filter(post => post.id !== postId),
-    }));
   };
 
   return (
@@ -116,13 +60,47 @@ const EditUserPostsScreen = () => {
                 {post.content}
               </Text>
             </TouchableOpacity>
-            {showPopover && selectedPostId === post.id && (
-              <PostPopover
-                postId={post.id}
-                isOpen={true} // isOpen is always true when this is rendered
-                onClose={() => setShowPopover(false)}
-                onDelete={handleDeletePost}
-              />
+            {selectedPostId === post.id && (
+              <Popover
+                trigger={triggerProps => (
+                  <Button {...triggerProps} colorScheme="danger">
+                    Delete Post
+                  </Button>
+                )}>
+                <Popover.Content accessibilityLabel="Delete Post" w="56">
+                  {/* Replace this content with your delete confirmation message */}
+                  <Popover.Arrow />
+                  <Popover.CloseButton />
+                  <Popover.Header>Delete Post</Popover.Header>
+                  <Popover.Body>
+                    Are you sure you want to delete this post?
+                  </Popover.Body>
+                  <Popover.Footer justifyContent="flex-end">
+                    <Button.Group space={2}>
+                      <Button
+                        variant="unstyled"
+                        colorScheme="coolGray"
+                        onPress={() => setSelectedPostId(null)}>
+                        Cancel
+                      </Button>
+                      <Button
+                        colorScheme="danger"
+                        onPress={() => {
+                          // Call to backend to delete the post and then update state
+                          setUserDetails(prevDetails => ({
+                            ...prevDetails,
+                            posts: prevDetails.posts.filter(
+                              filteredPost => filteredPost.id !== post.id,
+                            ),
+                          }));
+                          setSelectedPostId(null);
+                        }}>
+                        Delete
+                      </Button>
+                    </Button.Group>
+                  </Popover.Footer>
+                </Popover.Content>
+              </Popover>
             )}
           </Box>
         ))}
