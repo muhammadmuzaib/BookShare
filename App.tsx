@@ -332,7 +332,6 @@ const AppContent = () => {
           <Root.Navigator
             initialRouteName="LoginScreen"
             screenOptions={{headerShown: false}}>
-            {/* Always define all possible routes */}
             <Root.Screen name="Admin" component={AdminStackScreen} />
             <Root.Screen name="LoginScreen" component={LoginScreen} />
             <Root.Screen name="SignUpScreen" component={SignUpScreen} />
