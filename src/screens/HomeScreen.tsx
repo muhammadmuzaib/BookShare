@@ -38,6 +38,7 @@ function HomeScreen({navigation}: {navigation: any}) {
                   <Image
                     source={require('../images/book3.jpg')}
                     style={styles.image}
+                    accessibilityLabel="Book recomendations"
                   />
                 </Box>
               </Pressable>
@@ -63,6 +64,7 @@ function HomeScreen({navigation}: {navigation: any}) {
                     <Image
                       source={require('../images/book2.jpg')}
                       style={styles.image}
+                      accessibilityLabel="Recent purchases"
                     />
                   </Box>
                 </Pressable>
@@ -83,10 +85,11 @@ function HomeScreen({navigation}: {navigation: any}) {
                   onPress={() =>
                     navigation.navigate('BookDetails', {bookId: idx})
                   }>
-                  <Box style={styles.box}>
+                  <Box style={styles.box_horizontal}>
                     <Image
                       source={require('../images/book1.jpg')}
                       style={styles.image}
+                      accessibilityLabel="Rent again Books"
                     />
                   </Box>
                 </Pressable>

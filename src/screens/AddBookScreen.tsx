@@ -70,6 +70,7 @@ export default function AddBookScreen() {
         <Image
           resizeMode="contain"
           style={styles.image}
+          accessibilityLabel="Selected Image"
           source={imgUrl ? {uri: imgUrl} : require('../images/book3.jpg')}
         />
       </View>
