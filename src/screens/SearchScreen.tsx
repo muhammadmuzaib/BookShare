@@ -40,6 +40,7 @@ const SearchScreen = () => {
         <Image
           source={require('../images/icon-search.png')}
           alt="Search Icon"
+          accessibilityLabel="Search icon"
           style={styles.searchIcon}
         />
         <Input
