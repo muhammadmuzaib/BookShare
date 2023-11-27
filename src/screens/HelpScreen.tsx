@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import {Box, Heading, Text, useTheme} from 'native-base';
 import Accordion from 'react-native-collapsible/Accordion';
+import styles from '../styles/HelpScreenStyles';
 
 const sections = [
   {
@@ -28,27 +29,37 @@ const sections = [
 
 const HelpScreen = () => {
   const [activeSections, setActiveSections] = useState<number[]>([]);
+  const theme = useTheme();
 
   const renderHeader = (section: any) => (
-    <View style={{padding: 10, backgroundColor: 'indigo'}}>
-      <Text style={{color: 'white', fontWeight: 'bold'}}>{section.title}</Text>
-    </View>
+    <Box p={4} backgroundColor={theme.colors.primary[800]}>
+      <Text style={styles.text} color={theme.colors.primary[500]}>
+        {section.title}
+      </Text>
+    </Box>
   );
 
   const renderContent = (section: any) => (
-    <View style={{padding: 20, backgroundColor: 'lightgray', height: 100}}>
-      <Text>{section.content}</Text>
-    </View>
+    <Box style={styles.content} backgroundColor={theme.colors.primary[500]}>
+      <Text color={theme.colors.primary[700]}>{section.content}</Text>
+    </Box>
   );
 
   return (
-    <Accordion
-      sections={sections}
-      activeSections={activeSections}
-      renderHeader={renderHeader}
-      renderContent={renderContent}
-      onChange={setActiveSections}
-    />
+    <Box style={styles.container} backgroundColor={theme.colors.primary[300]}>
+      <Box style={styles.header}>
+        <Heading size={'xl'} color={theme.colors.primary[400]}>
+          How can we help?
+        </Heading>
+      </Box>
+      <Accordion
+        sections={sections}
+        activeSections={activeSections}
+        renderHeader={renderHeader}
+        renderContent={renderContent}
+        onChange={setActiveSections}
+      />
+    </Box>
   );
 };
 

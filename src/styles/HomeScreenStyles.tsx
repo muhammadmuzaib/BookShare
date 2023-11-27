@@ -58,6 +58,16 @@ const styles = StyleSheet.create({
   rentAgainContainer: {
     marginVertical: 5,
   },
+  box_horizontal: {
+    width: 200,
+    height: 200,
+    marginVertical: 30,
+    backgroundColor: 'grey',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
 });
 
 export default styles;

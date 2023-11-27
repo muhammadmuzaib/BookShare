@@ -42,6 +42,7 @@ import AdminEditUserScreen from './src/screens/adminScreens/AdminEditUserScreen'
 import EditAddressScreen from './src/screens/adminScreens/EditAdressScreen';
 import EditUserPostsScreen from './src/screens/adminScreens/EditUserPostsScreen';
 import ManageSpamScreen from './src/screens/adminScreens/ManageSpamScreen';
+import AdminSettingScreen from './src/screens/adminScreens/AdminSettingScreen';
 
 export type RootStackParamList = {
   Admin: undefined;
@@ -61,6 +62,7 @@ export type RootStackParamList = {
     bookId: number;
   };
   SettingsStack: undefined;
+  AdminSettingsStack: undefined;
   EditProfileScreen: undefined;
   ChatListScreen: undefined;
   ChatScreen: {userId: number; userName: string};
@@ -71,6 +73,7 @@ const Tab = createBottomTabNavigator();
 const SettingsStack = createStackNavigator();
 const AdminStack = createStackNavigator<RootStackParamList>();
 const AdminTab = createBottomTabNavigator();
+const AdminSettingsStack = createStackNavigator();
 
 function SettingsStackScreen() {
   return (
@@ -89,7 +92,6 @@ function SettingsStackScreen() {
         name="ReportProblemScreen"
         component={ReportProblemScreen}
       />
-      {/* Add other screens here */}
     </SettingsStack.Navigator>
   );
 }
@@ -201,6 +203,26 @@ function MainTabs() {
   );
 }
 
+function AdminSettingsStackScreen() {
+  return (
+    <AdminSettingsStack.Navigator initialRouteName="Settings">
+      <AdminSettingsStack.Screen
+        name="Settings"
+        component={AdminSettingScreen}
+      />
+      <AdminSettingsStack.Screen name="HelpScreen" component={HelpScreen} />
+      <AdminSettingsStack.Screen
+        name="AccountPrivacyScreen"
+        component={AccountPrivacyScreen}
+      />
+      <AdminSettingsStack.Screen
+        name="NotificationsScreen"
+        component={InappNotificationsScreen}
+      />
+    </AdminSettingsStack.Navigator>
+  );
+}
+
 function AdminTabs() {
   return (
     <AdminTab.Navigator
@@ -299,13 +321,44 @@ function AdminTabs() {
           ),
         }}
       />
+
+      <AdminTab.Screen
+        name="AdminSettings"
+        component={AdminSettingScreen}
+        options={{
+          tabBarLabel: 'Admin Settings',
+          // eslint-disable-next-line react/no-unstable-nested-components
+          tabBarIcon: ({focused}) => (
+            <TouchableOpacity activeOpacity={0.7}>
+              <Image
+                source={require('./src/images/icon-settings.png')}
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={{
+                  margin: 10,
+                  width: 30,
+                  height: 30,
+                  opacity: focused ? 1 : 0.5,
+                }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </AdminTab.Navigator>
   );
 }
 
 function AdminStackScreen() {
+  const theme = useTheme();
+  const headerColor = theme.colors.primary[300];
   return (
-    <AdminStack.Navigator initialRouteName="AdminTabs">
+    <AdminStack.Navigator
+      initialRouteName="AdminTabs"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: headerColor,
+        },
+      }}>
       <AdminStack.Screen name="AdminTabs" component={AdminTabs} />
       <AdminStack.Screen
         name="AdminEditUserScreen"
@@ -341,6 +394,10 @@ const AppContent = () => {
             <Root.Screen name="HelloScreen" component={HelloScreen} />
             <Root.Screen name="HelpScreen" component={HelpScreen} />
             <Root.Screen name="SettingsStack" component={SettingsStackScreen} />
+            <Root.Screen
+              name="AdminSettingsStack"
+              component={AdminSettingsStackScreen}
+            />
             <Root.Screen
               name="EditProfileScreen"
               component={EditProfileScreen}
