@@ -34,6 +34,7 @@ function LoginScreen({navigation}: {navigation: any}) {
         nextScreen = 'Admin';
       } else if (username === 'superadmin' && password === 'superadmin') {
         setUserRole('superAdmin');
+        nextScreen = 'SuperAdmin';
       } else {
         setUserRole('user');
         nextScreen = 'Main';

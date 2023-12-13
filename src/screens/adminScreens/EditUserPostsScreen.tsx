@@ -34,6 +34,7 @@ const EditUserPostsScreen = () => {
   };
 
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <ScrollView style={{flex: 1, backgroundColor: theme.colors.primary[300]}}>
       <VStack space={4} alignItems="center" px={3}>
         <Text
@@ -54,6 +55,7 @@ const EditUserPostsScreen = () => {
             <TouchableOpacity onPress={() => handlePressPost(post.id)}>
               <Image
                 source={require('../../images/book3.jpg')} // Update this path according to your project structure
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{width: '100%', height: 200}}
               />
               <Text color={theme.colors.primary[800]} mt={2}>
@@ -62,6 +64,7 @@ const EditUserPostsScreen = () => {
             </TouchableOpacity>
             {selectedPostId === post.id && (
               <Popover
+                // eslint-disable-next-line react/no-unstable-nested-components
                 trigger={triggerProps => (
                   <Button {...triggerProps} colorScheme="danger">
                     Delete Post

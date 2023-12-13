@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 250,
+    height: 250,
     marginBottom: 10,
   },
   inputItem: {

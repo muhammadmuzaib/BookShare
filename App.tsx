@@ -43,12 +43,14 @@ import EditAddressScreen from './src/screens/adminScreens/EditAdressScreen';
 import EditUserPostsScreen from './src/screens/adminScreens/EditUserPostsScreen';
 import ManageSpamScreen from './src/screens/adminScreens/ManageSpamScreen';
 import AdminSettingScreen from './src/screens/adminScreens/AdminSettingScreen';
+import SuperAdminHomeScreen from './src/screens/superAdminScreens/SuperAdminHomeScreen';
 
 export type RootStackParamList = {
   Admin: undefined;
   AdminHome: undefined;
   AdminTabs: undefined;
   AdminEditUserScreen: {userId: number};
+  SuperAdmin: undefined;
   EditAddressScreen: {userId: number};
   EditUserPostsScreen: {userId: number};
   ManageUsers: undefined;
@@ -74,6 +76,8 @@ const SettingsStack = createStackNavigator();
 const AdminStack = createStackNavigator<RootStackParamList>();
 const AdminTab = createBottomTabNavigator();
 const AdminSettingsStack = createStackNavigator();
+const SuperAdminStack = createStackNavigator<RootStackParamList>();
+const SuperAdminTab = createBottomTabNavigator();
 
 function SettingsStackScreen() {
   return (
@@ -228,7 +232,6 @@ function AdminTabs() {
     <AdminTab.Navigator
       screenOptions={{
         headerShown: false,
-        // You can add more default styling options here
       }}>
       <AdminTab.Screen
         name="AdminHome"
@@ -348,6 +351,35 @@ function AdminTabs() {
   );
 }
 
+function SuperAdminTabs() {
+  return (
+    <SuperAdminTab.Navigator screenOptions={{headerShown: false}}>
+      <AdminTab.Screen
+        name="SuperAdminHome"
+        component={SuperAdminHomeScreen}
+        options={{
+          tabBarLabel: 'SuperAdmin Home',
+          // eslint-disable-next-line react/no-unstable-nested-components
+          tabBarIcon: ({focused}) => (
+            <TouchableOpacity activeOpacity={0.7}>
+              <Image
+                source={require('./src/images/icon-home.png')}
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={{
+                  margin: 10,
+                  width: 30,
+                  height: 30,
+                  opacity: focused ? 1 : 0.5,
+                }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </SuperAdminTab.Navigator>
+  );
+}
+
 function AdminStackScreen() {
   const theme = useTheme();
   const headerColor = theme.colors.primary[300];
@@ -376,6 +408,25 @@ function AdminStackScreen() {
   );
 }
 
+function SuperAdminStackScreen() {
+  const theme = useTheme();
+  const headerColor = theme.colors.primary[300];
+  return (
+    <SuperAdminStack.Navigator
+      initialRouteName="AdminTabs"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: headerColor,
+        },
+      }}>
+      <SuperAdminStack.Screen
+        name="SuperAdminTabs"
+        component={SuperAdminTabs}
+      />
+    </SuperAdminStack.Navigator>
+  );
+}
+
 // create component
 const AppContent = () => {
   return (
@@ -386,6 +437,7 @@ const AppContent = () => {
             initialRouteName="LoginScreen"
             screenOptions={{headerShown: false}}>
             <Root.Screen name="Admin" component={AdminStackScreen} />
+            <Root.Screen name="SuperAdmin" component={SuperAdminStackScreen} />
             <Root.Screen name="LoginScreen" component={LoginScreen} />
             <Root.Screen name="SignUpScreen" component={SignUpScreen} />
             <Root.Screen name="Main" component={MainTabs} />

@@ -45,6 +45,7 @@ const SearchScreen = () => {
         />
         <Input
           backgroundColor={theme.colors.primary[500]}
+          color={theme.colors.primary[900]}
           flex={1}
           placeholder="Search for books..."
           value={searchQuery}
