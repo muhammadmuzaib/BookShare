@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, View} from 'react-native';
+import {Image, Pressable, View} from 'react-native';
 import {
   Box,
   Text,
@@ -139,15 +139,19 @@ const AccountScreen = ({navigation}: {navigation: any}) => {
       numColumns={3}
       keyExtractor={item => item.id}
       renderItem={({item}) => (
-        <View style={styles.itemContainer}>
-          <Image
-            source={item.image}
-            style={styles.postImg}
-            resizeMode="cover"
-            alt="Posts"
-            accessibilityLabel="Posts"
-          />
-        </View>
+        <Pressable
+          style={styles.itemContainer}
+          onPress={() => navigation.navigate('BookDetails', {bookId: item.id})}>
+          <View>
+            <Image
+              source={item.image}
+              style={styles.postImg}
+              resizeMode="cover"
+              alt="Posts"
+              accessibilityLabel="Posts"
+            />
+          </View>
+        </Pressable>
       )}
       //ListFooterComponent={<Footer navigation={navigation} />}
     />
