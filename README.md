@@ -23,6 +23,12 @@ Database: MySQL
 
 Tools: Visual Studio, Jira, GitHub (for tracking hours)
 
+![HomePage](https://github.com/user-attachments/assets/f38afd60-6151-4c89-bf54-952be435a130) ![SettingsPage](https://github.com/user-attachments/assets/bdf6831a-e673-4dd1-8ef6-885324c9f9cd)![ChatPage](https://github.com/user-attachments/assets/b63d1309-d088-40c9-a977-c2eb883af001)![ProfilePage](https://github.com/user-attachments/assets/7cf698f9-4c6c-4e84-8460-e842cc13280d)
+
+
+
+
+
 # 🚀 Getting Started
 
 **Prerequisites**
